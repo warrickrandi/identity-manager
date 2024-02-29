@@ -1,0 +1,25 @@
+﻿@model TwoFactorAuthenticationViewModel
+
+<p>
+    Please enter the code below in your authenticator App or Scan the QR Code.
+</p>
+<p>
+    @Model.Token
+</p>
+<div id="qrCode"></div>
+
+<form method="post">
+    <input hidden asp-for="Token" />
+    <input hidden asp-for="QRCodeUrl" />
+    <div class="form-group">
+        Enter Code : <input type="text" class="form-control" asp-for="Code" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@section Scripts{
+    <script src="~/js/qrcode.js"></script>
+    <script type="text/javascript">
+        new QRCode(document.getElementById("qrCode"), "@Model.QRCodeUrl");
+    </script>
+}
